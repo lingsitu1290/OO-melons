@@ -7,8 +7,8 @@ class AbstractMelonOrder(object):
         """ Initialize all melon order types. """
 
         self.species = species
-        self.qty = qty 
-        self.tax = 0.08
+        self.qty = qty
+        self.shipped = False
 
     def get_total(self):
         """ Calculates the total price of melon order. """
@@ -28,12 +28,10 @@ class DomesticMelonOrder(AbstractMelonOrder):
 
     def __init__(self, species, qty):
         """Initialize melon order attributes"""
+        super(DomesticMelonOrder, self).__init__(species, qty)
 
-        self.shipped = False
         self.order_type = "domestic"
         self.tax = 0.08
-
-        super(DomesticMelonOrder, self).__init__(species, qty)
 
 
 class InternationalMelonOrder(AbstractMelonOrder):
@@ -42,12 +40,12 @@ class InternationalMelonOrder(AbstractMelonOrder):
     def __init__(self, species, qty, country_code):
         """Initialize melon order attributes"""
 
+        super(InternationalMelonOrder, self).__init__(species, qty)
+
         self.country_code = country_code
-        self.shipped = False
         self.order_type = "international"
         self.tax = 0.17
 
-        super(InternationalMelonOrder, self).__init__(species, qty)
 
     def get_country_code(self):
         """Return the country code."""
