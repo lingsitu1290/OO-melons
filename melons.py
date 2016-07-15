@@ -1,5 +1,7 @@
 """This file should have our order classes in it."""
 
+import random
+
 class AbstractMelonOrder(object):
     """ Parent class for various types of melon orders. """
 
@@ -15,8 +17,9 @@ class AbstractMelonOrder(object):
     def get_total(self):
         """ Calculates the total price of melon order. """
 
-        base_price = 5
-
+        base_price = self.get_base_price()
+        print base_price
+        
         total = (1 + self.tax) * self.qty * base_price
 
         if self.species == 'Christmas melon':
@@ -31,6 +34,12 @@ class AbstractMelonOrder(object):
         self.shipped = True
 
 
+    def get_base_price(self):
+        """ Get random base price between 5 and 9. """
+
+        return random.randint(5,9)
+        
+
 class DomesticMelonOrder(AbstractMelonOrder):
     """A domestic (in the US) melon order."""
 
@@ -40,7 +49,7 @@ class DomesticMelonOrder(AbstractMelonOrder):
                                                  qty=qty,
                                                  order_type='domestic',
                                                  tax=0.08)
-        
+
 
 class InternationalMelonOrder(AbstractMelonOrder):
     """An international (non-US) melon order."""
@@ -93,3 +102,5 @@ class GovernmentMelonOrder(AbstractMelonOrder):
         """ Update order inspection status. """
 
         self.passed_inspection = passed
+
+
