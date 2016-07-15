@@ -18,8 +18,6 @@ class AbstractMelonOrder(object):
         """ Calculates the total price of melon order. """
 
         base_price = self.get_base_price()
-        print base_price
-        
         total = (1 + self.tax) * self.qty * base_price
 
         if self.species == 'Christmas melon':
@@ -45,7 +43,7 @@ class DomesticMelonOrder(AbstractMelonOrder):
 
     def __init__(self, species, qty):
         """Initialize melon order attributes"""
-        super(DomesticMelonOrder, self).__init__(species=species, 
+        super(DomesticMelonOrder, self).__init__(species=species,
                                                  qty=qty,
                                                  order_type='domestic',
                                                  tax=0.08)
@@ -57,7 +55,7 @@ class InternationalMelonOrder(AbstractMelonOrder):
     def __init__(self, species, qty, country_code):
         """Initialize melon order attributes"""
 
-        super(InternationalMelonOrder, self).__init__(species=species, 
+        super(InternationalMelonOrder, self).__init__(species=species,
                                                       qty=qty, 
                                                       order_type="international",
                                                       tax=0.17)
@@ -67,7 +65,7 @@ class InternationalMelonOrder(AbstractMelonOrder):
 
     def get_total(self):
         """ Get the total of an international order 
-        and adds a surcharge for not reaching a minimum number of melons.  
+        and adds a surcharge for not reaching a minimum number of melons.
 
         """
 
@@ -96,11 +94,10 @@ class GovernmentMelonOrder(AbstractMelonOrder):
                                                     order_type="government",
                                                     tax=0)
 
-        self.passed_inspection = False 
+        self.passed_inspection = False
+
 
     def mark_inspection(self, passed):
         """ Update order inspection status. """
 
         self.passed_inspection = passed
-
-
